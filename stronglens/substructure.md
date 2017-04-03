@@ -39,6 +39,8 @@ discrepancy signals a failure of the CDM model.
 **Figure 2:  Contour maps of the substructure surface mass fraction of the halo Aq-E-2, in X-projection. Left-hand panel: semi-analytic galaxies are added to the dark matter subhalo population. The mean surface mass fraction, fsub,annu, of the substructures within the 0.1 arcsec-annulus (indicated by the dashed lines) around the tangential critical curve is ∼0.16 per cent. Right-hand panel: semi-analytic galaxies and MW GCs are added to the dark subhalo population. fsub,annu∼ 0.19 per cent. GCs are more centrally distributed in the projected central region than satellite galaxies. The blue circle indicates an example of the small-scale wiggles induced by GCs.**
 <li> item2
 
+
+"We conclude that the abundance of intrinsic substructures, dark or bright, bound or diffuse, cannot fully account for the observed cusp-violation frequency. Taken at face value, this lack of substructure suggests a serious problem for the CDM model. Warm dark matter models, which could reduce the satellite abundance and may help to bring the dwarf galaxy LF into agreement with observations without invoking strong feedback or photoionization effects (e.g. Sawala et al. 2010), would only make this problem worse. However, it is possible that the observed frequency of flux anomalies is strongly biased by the small number statistics of CLASS."
 <li> item3
 
 </ol>
