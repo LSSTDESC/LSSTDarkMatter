@@ -10,7 +10,7 @@ Substructure
 #### <a name="baryons"></a>Effects of Baryons
 
 <ol>
-<li> "Xu, D.D., Mao, S., Cooper, A.P., et al. 2010, Substructure lensing: effects of galaxies, globular clusters and satellite streams, MNRAS, 408, 1721":http://adsabs.harvard.edu/abs/2010MNRAS.408.1721X
+<li> Xu, D.D., Mao, S., Cooper, A.P., et al. 2010, Substructure lensing: effects of galaxies, globular clusters and satellite streams, MNRAS, 408, 1721:  http://adsabs.harvard.edu/abs/2010MNRAS.408.1721X
 
 Lensing flux-ratio anomalies have been frequently observed and taken
 as evidence for the presence of abundant dark matter substructures in
