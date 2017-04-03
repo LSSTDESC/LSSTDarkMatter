@@ -55,7 +55,7 @@ observe the Milky Way in the first year, will unnecessarily preclude
 microlensing dark matter science. It is pressing that we begin this effort now
 while there is still time to influence the LSST survey strategy.
 
-![alt text](https://github.com/LSSTDESC/LSSTDarkMatter/macho/MACHOConstraints.png "Figure 1")
+![alt text](MACHOConstraints.png "Figure 1")
 
 Figure 1: Existing constraints on the fraction of the mass in the MW halo that
 can be composed of IM MACHO dark matter. We seek to extend the existing MACHO
