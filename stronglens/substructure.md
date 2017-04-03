@@ -205,7 +205,7 @@ http://cdsarc.u-strasbg.fr/viz-bin/qcat?J/A+A/553/A53
 
 
 
-</ol>Ota, N., Oguri, M., Dai, X., et al. 2012, The Chandra View of the Largest Quasar Lens SDSS J1029+2623, ApJ, 758, 26:  http://adsabs.harvard.edu/abs/2012ApJ...758...26O
+<li>Ota, N., Oguri, M., Dai, X., et al. 2012, The Chandra View of the Largest Quasar Lens SDSS J1029+2623, ApJ, 758, 26:  http://adsabs.harvard.edu/abs/2012ApJ...758...26O
 
 We present results from Chandra observations of the cluster lens SDSS
 J1029+2623 at zl = 0.58, which is a gravitationally lensed quasar with
@@ -227,5 +227,7 @@ all the flux ratios are inconsistent with those predicted by simple
 mass models. This implies that microlensing effect is not significant
 for this system and dark matter substructure is mainly responsible for
 the anomalous flux ratios.
+
+</ol>
 
 [Back to top.](#top)
