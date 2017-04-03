@@ -1,0 +1,16 @@
+References for Dark Matter substructures:
+	http://fire.northwestern.edu/2017/03/21/not-so-lumpy-after-all-modeling-the-depletion-of-dark-matter-subhalos-by-milky-way-like-galaxies/
+	http://iopscience.iop.org/article/10.1088/0004-637X/753/2/106/meta
+
+	Why should substructure be destroyed in galactic halos but
+not in clusters? Analytic calculations suggested that galaxies
+should contain more satellites than are observed (Kauffmann,
+White, & Guilderdoni 1993). The shape of the power spectrum
+varies over these scales in a way such that galaxies form several
+billions of years before the clusters, and as a result, the mass
+function of their progenitor clumps may differ. Furthermore,
+as the power spectrum asymptotically approaches a slope of
+-3, clumps of all masses will be collapsing simultaneously,
+and the timescale between collapse and subsequent merging
+becomes shorter. - http://iopscience.iop.org/article/10.1086/312287/pdf
+
