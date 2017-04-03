@@ -35,6 +35,7 @@ sources of lensing flux anomalies. Another possibility is that this
 discrepancy signals a failure of the CDM model.
 
 ![Figure 2](https://oup.silverchair-cdn.com/oup/backfile/Content_public/Journal/mnras/408/3/10.1111/j.1365-2966.2010.17235.x/3/mnras0408-1721-f2.jpeg?Expires=1491345898&Signature=P8p0C~RdgvLG~-OvNqhBmgR660LTd63GD-RcJaOQltxexapIQTj9siq30GJQ03ysFQ9UJFaUFcyihUcU53kTI6JgsupnIIB6dvOvV0bqebFGfxV2cYhyiaK2sTvJ-pZqpxBc5cYrbKkG5Mz92nUqhduJboH1aqQZgNAWMl8vDus9IBbRenK7CjySP~XPFmcegsFjGp25TWOUOtGrWBjzJQWpT89lFhGv2vI~5pAnQ~Uij9HSpSSRadyO4ZIXE6URHz0v1QivsR4VlzwWzUDhLwwOOgDxqsBCkoru0yLzFCYrkSCQk6TWYZqetrpvX7t0xWLm~PW3N~BOHDShoHwrvA__&Key-Pair-Id=APKAIUCZBIA4LVPAVW3Q)
+
 **Figure 2:  Contour maps of the substructure surface mass fraction of the halo Aq-E-2, in X-projection. Left-hand panel: semi-analytic galaxies are added to the dark matter subhalo population. The mean surface mass fraction, fsub,annu, of the substructures within the 0.1 arcsec-annulus (indicated by the dashed lines) around the tangential critical curve is ∼0.16 per cent. Right-hand panel: semi-analytic galaxies and MW GCs are added to the dark subhalo population. fsub,annu∼ 0.19 per cent. GCs are more centrally distributed in the projected central region than satellite galaxies. The blue circle indicates an example of the small-scale wiggles induced by GCs.**
 <li> item2
 
