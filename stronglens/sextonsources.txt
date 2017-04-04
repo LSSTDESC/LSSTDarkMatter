@@ -1,0 +1,22 @@
+﻿Marshall predicts: “LSST will increase the number of galaxy-scale strong lens detections by an order of magnitude over Dark Energy Survey, 
+and by a factor of 100 over the current sample. And we expect to find nearly 10,000 lensed quasars during the survey – 
+and measure the time delays in several thousand of them.” The LSST lensed quasar sample will be around two orders of magnitude larger than the 
+current largest survey of lensed quasars.
+https://www.lsst.org/News/enews/lensing-201107.html, LSST Enews july 2011 Volume 4 number 2
+
+A high-yield lens search requires all four of the properties oﬀered by LSST: wide area, depth, high image resolution, and spectral coverage
+to distinguish lens and source light. Other surveys – current, planned, or concurrent with LSST – will lack at least one of these properties.
+Only SKA is likely to surpass LSST in terms of raw yield; Euclid will perform comparably well, but will only overlap with LSST in the Southern 
+half of the sky. LSST should be able to detect ≈ 8000 time-delay lenses (including both AGN and supernovae); the combination of LSST and Euclid
+imaging is an exciting prospect for efficient lens identification.
+http://www.lsst-desc.org/WorkingGroups/SL, SL desc working group, date is ambiguous on this one, it could be between 2012 and 2013
+
+bling the targeted study of ∼ 100 of these systems and resulting in substantial gains
+in the dark energy figure of merit. In the next decade, a further order of magnitude improvement will be possible with
+the 104 systems expected to be detected and measured with LSST and Euclid
+Third, in the 2020’s, LSST will deliver 1000’s of time delays; the bottleneck will instead be the aquisition and analysis
+of high resolution imaging follow-up.
+This program leverages and enhances existing surveys such as Pan-STARRS1, Dark Energy Survey, and
+Hyper Suprime-Cam which will discover > 100 well-measurable time delay systems this decade, and LSST
+which will discover > 1000 systems next decade, and involves high performance computing delivering added
+value to the analysis pipelines of these experiments.https://arxiv.org/abs/1306.1272, Dark energy with gravitational lens time delays, 6 june 2013
