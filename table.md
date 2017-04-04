@@ -4,9 +4,9 @@ Gaps in Streams | Power at small scale | Increasing number of streams; large dis
 Potential from Streams | Halo shape | Increasing number of streams | spectroscopy; Gaia; wfirst | perturbation from large accretion events (MW history); non-equilibrium dynamics |
 Colliding Clusters | self-interaction cross section | Finding colliding clusters; weak-lensing mass mapping; galaxy centroids; gas distribution and mass | chandra/xmm/erosita; w-first; SPT/ACT |
 Cluster weak lensing mass | decay/annihilation | finding clusters; weak lensing mass profiles | x-rays | agn feedback; mergers (non-equilibrium); Baryon emission lines |
-Cluster weak lensing mass profiles | halo shape | finding clusters; weak lensing mass profiles | | shape & intrinsic alignment of galaxies  |
+Cluster galaxy and weak lensing mass profiles | halo shape | finding clusters; deep cluster galaxy catalog; weak lensing mass profiles | | shape & intrinsic alignment of galaxies  |
 Combined probes of cluster central mass profiles| self-interaction | finding clusters; weak lensing mass profiles; galaxy profiles; dynamics of "wobbbling" BCGs; targets for velocity dispersion spectroscopy| spectroscopy | shape & intrinsic alignment of galaxies; photometry de-blending  |
-Combined probes of cluster outer mass profiles (splashback radius)| self-interaction | finding clusters; weak lensing mass profiles; galaxy profiles;| X-ray; spt/act for gas profiles | shape & intrinsic alignment of galaxies |
+Combined probes of cluster outer mass profiles (splashback radius)| self-interaction | finding clusters; weak lensing mass profiles; galaxy profiles;| X-ray, spt/act for gas profiles | shape & intrinsic alignment of galaxies |
 Cluster strong lensing | halo shape; self-interaction; sustructure (higher mass scale) | finding clusters and lenses; galaxy profiles; | mass-to-light ratios; gas/baryon distribution and mass; mergers and equilibrium | 
 Galaxy-Galaxy strong lensing | small scale structure; shape of main halo; dark matter distribution | finding lenses | ALMA, HST/JWST, w-firt/euclid, spectroscopy | baryon distribution; substructure disruption
 Strong lensing time-domain | small scale; density profile of substructure (?) | finding lenses; monitoring lenses | high-cadence photometry; ALMA, HST/JWST, w-firt/euclid, spectroscopy | |
