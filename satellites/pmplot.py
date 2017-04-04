@@ -40,6 +40,7 @@ def genstar(m_ini, int_imf, dm, N, mags=None, maglim=None, pad=0.5):
 	if xind.sum() == 0:
 		return None
 	minmass = mgrid[xind].min()
+	
 	minim = np.nonzero(II(imgrid) >= minmass)[0][0]
 	minim = max(0, minim - 1)
 	minim = imgrid[minim]  # starting point in the IMF
@@ -65,48 +66,58 @@ def genstar(m_ini, int_imf, dm, N, mags=None, maglim=None, pad=0.5):
 		cnt += xind.sum()
 		cnt2 += N
 		#1 / 0
+	if len(res)==0:
+		return None
 	for k in interps.keys():
 		res[k] = np.concatenate(res[k])
 	return res
 
 
-def getnorm(dm, maglim):
+def getnorm(iso, dm, maglim):
 	# find the luminosity of a system with on average one star above the limit
 	nstars = 1e8
-	dat0 = genstar(iso['M_ini'], iso['int_IMF'], 0, int(nstars),
-				   mags={'r': iso['r'], 'g': iso['g']},	 maglim={'r': maglim})
-	totlum = -2.5 * np.log10((10**(-dat0['r'] / 2.5)).sum() / nstars)
+	
+	dat0 = genstar(iso['M_ini'], iso['int_IMF'], dm, int(nstars),
+				   mags={'r': iso['r'], 'g': iso['g']},	
+				   #maglim={'r': maglim}
+				   )
+	Ms = dat0['r'] - dm
+	totlum = -2.5 * np.log10((10 ** (-Ms / 2.5)).sum()/nstars)
+	frac = (dat0['r']<maglim).sum() / nstars
+	totlum = totlum + 2.5*np.log10(frac)
 	return totlum
-
 
 maglim = 25
 cache = {}
 iso = down_girardi.getit(10, -2, "SDSS ugriz")
 
 
-def simSat(mv, dm, maglim):
+def simSat(iso, mv, dm, maglim):
 	# simulate a satellite with luminosity mv at a distance modulus of dm
 	# with the magnitude limit of maglim
 	if (dm, maglim) not in cache:
-		cache[dm, maglim] = getnorm(dm, maglim)
+		cache[dm, maglim] = getnorm(iso, dm, maglim)
 	norm = cache[dm, maglim]
 
 	# expected number of stars above the limit
 	Nstars = 10**((norm - mv) / 2.5)
 	Nstars1 = np.random.poisson(Nstars)
-	# actual number of stars
-
+	# actual number of stars1
+	print (Nstars,Nstars1)
 	dat = genstar(iso['M_ini'], iso['int_IMF'], dm, Nstars1,
 				  mags={'r': iso['r'],
 						'g': iso['g']},
 				  maglim={'r': maglim})
+				  
 	return dat
 
 
 def getVelPrec(mv, dist, maglim, muPmI):
 	# args luminosity[mags], distance[kpc]
 	dm = 5 * np.log10(dist * 1e3) - 5
-	dat = simSat(mv, dm, maglim)
+	dat = simSat(iso, mv, dm, maglim)
+	if dat is None:
+		return np.nan
 	muerr = 10**muPmI(dat['r'])
 	muerr = np.sqrt(1. / (1. / muerr**2).sum())
 	rverr = muerr * dist * 4.74
@@ -115,12 +126,14 @@ def getVelPrec(mv, dist, maglim, muPmI):
 def getVelPrec1(mv, dist, maglim, muPmI):
 	# args luminosity[mags], distance[kpc]
 	dm = 5 * np.log10(dist * 1e3) - 5
-	dat = simSat(mv, dm, maglim)
+	dat = simSat(iso, mv, dm, maglim)
+	if dat is None:
+		return np.nan
+
 	muerr = 10**muPmI(dat['r'])
 	rverr = muerr * dist * 4.74
 	rvsig = 5
 	ret = 1/np.sqrt(2) /rvsig / np.sqrt(np.sum(1/(rvsig**2+rverr**2)**2))
-	#rverr = np.sqrt(1. / (1. / rverr**2).sum())
 	return ret
 
 
