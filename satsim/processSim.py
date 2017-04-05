@@ -6,6 +6,8 @@ import lsst.pipe.base as pipeBase
 import lsst.afw.table as afwTable
 from lsst.meas.astrom import AstrometryTask, displayAstrometry, createMatchMetadata,\
     LoadAstrometryNetObjectsTask
+import lsst.afw.image as afwImg
+
 from lsst.obs.base import ExposureIdInfo
 import lsst.daf.base as dafBase
 from lsst.afw.math import BackgroundList
@@ -93,9 +95,13 @@ if __name__ == "__main__":
     import pyfits
     fits = pyfits.open(sys.argv[1])
     data = fits[0].data
+    hdr = afwImg.readMetadata(sys.argv[1])
+    wcs = afwImg.makeWcs(hdr)
+
     exposure = lsst.afw.image.ExposureF(data.shape[1], data.shape[0])
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
     exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
+    exposure.setWcs(wcs)
     exposure.setPsf(lsst.afw.detection.GaussianPsf(39, 39, 0.6))
     
     config = ProcessSimTask.ConfigClass()
