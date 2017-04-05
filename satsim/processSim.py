@@ -101,12 +101,12 @@ def getVar(data):
     # estimate variance (read out noise + sky photon noise)
     # from edges of the frame
     pad = 10
-    rdnoise = np.var(np.concatenate((
+    var = np.var(np.concatenate((
         data[:pad,:].flatten(), 
         data[:,:pad].flatten(),
         data[-pad:,:].flatten(), 
-        data[:,-pad:].flatten())
-    return dat 
+        data[:,-pad:].flatten() )))
+    return var 
 
 if __name__ == "__main__":
     import sys

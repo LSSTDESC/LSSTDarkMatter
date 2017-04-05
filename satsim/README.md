@@ -1,1 +1,11 @@
+Requirements
+
+* Main LSST installation 
+eups distrib install -t v13_0 lsst_distrib
+
+* LSST sims installation
+eups distrib install -t sims_2_3_4  lsst_sims
+
+* imsim
+https://github.com/LSSTDESC/imSim
 
