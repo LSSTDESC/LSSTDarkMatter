@@ -137,10 +137,13 @@ def main(file, psf, outdir):
 
 
 def doall():
-    inputfiles = ['../instcat/sersic_g.txt', '../instcat/sersic_r.txt']
+    inppref = '../instcat/'
+    # prefix to the input photsim files
     outpref = 'fits/'
+    # outfiles prefix
+    inputfiles = ['sersic_g.txt', 'sersic_r.txt']
     for i in inputfiles:
-        main(i,'doublegaussian','outpref')
+        main(inppref+'/' +i,'doublegaussian',outpref)
     
 if __name__ == "__main__":
     doall()
