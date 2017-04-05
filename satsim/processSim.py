@@ -1,3 +1,9 @@
+"""
+A slim version of pipe_tasks/calibrate with only detection, deblending and measurement.
+To use it, modify confif part as you wish, then
+python processSim.py <input image> <output fits catalog>
+"""
+
 import math
 
 from lsstDebug import getDebugFrame
@@ -54,6 +60,7 @@ class ProcessSimTask(pipeBase.Task):
         self.schemaMapper = None
         self.schema = afwTable.SourceTable.makeMinimalSchema()
         
+        # make sub-tasks
         self.makeSubtask("detection", schema=self.schema)
         if self.config.doDeblend:
             self.makeSubtask("deblend", schema=self.schema)
@@ -102,6 +109,7 @@ if __name__ == "__main__":
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
     exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
     exposure.setWcs(wcs)
+    ### The psf is hardcoded as sigma=0.6 with the shape of 39x39
     exposure.setPsf(lsst.afw.detection.GaussianPsf(39, 39, 0.6))
     
     config = ProcessSimTask.ConfigClass()
