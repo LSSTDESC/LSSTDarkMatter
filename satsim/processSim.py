@@ -97,6 +97,17 @@ class ProcessSimTask(pipeBase.Task):
             sourceCat = sourceCat
         )
 
+def getVar(data):
+    # estimate variance (read out noise + sky photon noise)
+    # from edges of the frame
+    pad = 10
+    rdnoise = np.var(np.concatenate((
+        data[:pad,:].flatten(), 
+        data[:,:pad].flatten(),
+        data[-pad:,:].flatten(), 
+        data[:,-pad:].flatten())
+    return dat 
+
 if __name__ == "__main__":
     import sys
     import pyfits
@@ -107,7 +118,7 @@ if __name__ == "__main__":
 
     exposure = lsst.afw.image.ExposureF(data.shape[1], data.shape[0])
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
-    exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
+    exposure.getMaskedImage().getVariance().getArray()[:,:] = getVar(data)
     exposure.setWcs(wcs)
     ### The psf is hardcoded as sigma=0.6 with the shape of 39x39
     exposure.setPsf(lsst.afw.detection.GaussianPsf(39, 39, 0.6))
