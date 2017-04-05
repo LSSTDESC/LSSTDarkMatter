@@ -42,22 +42,32 @@ class ProcessSimConfig(pexConfig.Config):
 
 
 class ProcessSimTask(pipeBase.Task):
-    
+    _DefaultName = "processSim"
     ConfigClass = ProcessSimConfig
     
     def __init__(self, **kwds):
         pipeBase.Task.__init__(self, **kwds)
         
         # add schema here
-        self.makeSubTask("detection", schema=self.schema)
+        self.schemaMapper = None
+        self.schema = afwTable.SourceTable.makeMinimalSchema()
+        
+        self.makeSubtask("detection", schema=self.schema)
         if self.config.doDeblend:
-            self.makeSubTask("deblend", schema=self.schema)
-        self.makeSubTask("measurement", schema=self.schema)
+            self.makeSubtask("deblend", schema=self.schema)
+        self.makeSubtask("measurement", schema=self.schema)
     
     
     def run(self, exposure):
-        detRes = self.detection.run(exposure=exposure)
+        
+        table = SourceTable.make(self.schema)
+        background = None
+        
+        detRes = self.detection.run(table=table, exposure=exposure)
         sourceCat = detRes.sources
+        
+        if background is None:
+            background = BackgroundList()
         if detRes.fpSets.background:
             background.append(detRes.fpSets.background)
         
@@ -87,6 +97,7 @@ if __name__ == "__main__":
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
     exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
     exposure.setPsf(lsst.afw.detection.GaussianPsf(39, 39, 0.6))
+    
     config = ProcessSimTask.ConfigClass()
     task = ProcessSimTask(config=config)
     result = task.run(exposure)
