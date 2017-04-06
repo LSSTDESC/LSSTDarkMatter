@@ -189,12 +189,17 @@ if __name__ == "__main__":
             if args.nsims > 1:
                 base,ext = os.path.splitext(outfile)
                 suffix = '_{:0{width}d}'.format(i+1,width=len(str(args.nsims)))
-                outfile = base + suffix + ext
+                outfile_g = base + '_g' + suffix + ext
+                outfile_r = base + '_r' + suffix + ext
             if os.path.exists(outfile): os.remove(outfile)
             logging.info("Writing %s..."%outfile)
-            out = open(outfile,'w',1)
+            out_g = open(outfile_g,'w',1)
+            out_r = open(outfile_r,'w',1)
         else:
-            out = sys.stdout
+            out_g = sys.stdout
+            out_r = sys.stdout
 
-        writer.write(out,dwarf,data)
-        out.flush()
+        writer.write_g(out_g,dwarf,data)
+        writer.write_r(out_r,dwarf,data)
+        out_g.flush()
+        out_r.flush()
