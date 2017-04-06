@@ -186,13 +186,19 @@ if __name__ == "__main__":
         # Write output
         if args.outfile:
             outfile = args.outfile
+            base,ext = os.path.splitext(outfile)
             if args.nsims > 1:
-                base,ext = os.path.splitext(outfile)
                 suffix = '_{:0{width}d}'.format(i+1,width=len(str(args.nsims)))
                 outfile_g = base + '_g' + suffix + ext
                 outfile_r = base + '_r' + suffix + ext
-            if os.path.exists(outfile): os.remove(outfile)
-            logging.info("Writing %s..."%outfile)
+            else:
+                outfile_g = base + '_g' + ext
+                outfile_r = base + '_r' + ext
+            print 'outfile_g = %s' %outfile_g
+            print 'outfile_r = %s' %outfile_r
+            if os.path.exists(outfile_g): os.remove(outfile_g)
+            if os.path.exists(outfile_r): os.remove(outfile_r)
+            logging.info("Writing %s and %s..."%(outfile_g, outfile_r))
             out_g = open(outfile_g,'w',1)
             out_r = open(outfile_r,'w',1)
         else:
