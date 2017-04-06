@@ -137,8 +137,8 @@ if __name__ == "__main__":
     dwarf.set_kinematics(kinematics)
     logging.debug(str(dwarf))
 
-    import writer
-    instcat = writer.InstCatWriter()
+    import instcat
+    writer = instcat.InstCatWriter()
 
     for i in range(args.nsims):
         # Run the simulation
@@ -158,6 +158,5 @@ if __name__ == "__main__":
         else:
             out = sys.stdout
 
-        logging.info("Writing %s..."%outfile)
-        instcat.write(out,dwarf,data)
+        writer.write(out,dwarf,data)
         out.flush()

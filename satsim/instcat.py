@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """
-Convert the simulation into an imsim input file.
+Convert a simulated set of stars into an instcat file for imsim.
 """
 __author__ = "Alex Drlica-Wagner"
+
 import os
 import copy
 from collections import OrderedDict as odict
@@ -39,16 +40,22 @@ DEFAULTS = odict([
     ('vistime', 33.0000000),
     ])
 
-#object 811883374596 31.2499807 -10.032142 23.1621553 starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none none
+POINT = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none CCM 0.0 3.1".format(MAG)
 
-RESOLVED = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none CCM 0.0 3.1".format(MAG)
-
-UNRESOLVED = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 sersic2d %(EXT)12.6f %(EXT)12.6f 0 1 none CCM 0.0 3.1".format(MAG)
+SERSIC = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 sersic2d %(EXT)12.6f %(EXT)12.6f 0 1 none CCM 0.0 3.1".format(MAG)
 
 def set_defaults(kwargs,defaults):
     for k,v in defaults.items():
         kwargs.setdefault(k,v)
     return kwargs
+
+def read_instcat(filename,**kwargs):
+    """ Read an instcat file into a numpy.recarray """
+    defaults =dict(skip_header=23,usecols=[1,2,3,4],
+                   dtype=[('ID',int),('RA',float),('DEC',float),('MAG',float)])
+    set_defaults(kwargs,defaults)
+    return np.genfromtxt(filename,**kwargs)
+
 
 class InstCatWriter(object):
 
@@ -90,7 +97,7 @@ class InstCatWriter(object):
 
     def resolved_string(self, dwarf, data, **kwargs):
         sel = (data[MAG] <= MAGLIMS[FILTER])
-        return '\n'.join(np.char.mod([RESOLVED],data[sel]))
+        return '\n'.join(np.char.mod([POINT],data[sel]))
 
     def unresolved_string(self, dwarf, data, **kwargs):
         sel = (data[MAG] > MAGLIMS[FILTER])
@@ -100,7 +107,7 @@ class InstCatWriter(object):
                       EXT=dwarf.extension*3600 / 1.68, # arcsec
         )
         params[MAG] = self.cumulative_magnitude(data[sel])
-        return UNRESOLVED%(params) + '\n'
+        return SERSIC%(params) + '\n'
 
     def cumulative_magnitude(self,data):
         return -2.5 * np.log10(np.sum(10**(data[MAG]/-2.5)))
