@@ -99,14 +99,17 @@ class Simulator(object):
                            help='centroid declination (deg)')
         group.add_argument('--position_angle',type=float,default=0.0,
                            help='position angle east-of-north (deg)')
+        # ignore Position Angle for now, assuming the stream is east-west oriented.
 
-        # Extra terms for streams.
-        # this code will not bypass these arguments:
+
+        # this code will not using the following parameters:
         # stellar_mass
         # absolute_magnitude
         # extension
         # ellipticity
         # half_light_radius
+
+        # Extra terms for streams.
         group = parser.add_argument_group('Additional parameters for streams')
         group.add_argument('--surface_brightness',type=float,default=30,
                            help='average surface brightness within the width of stream (mag/arcsec^2)')
@@ -121,8 +124,6 @@ class Simulator(object):
         egroup.add_argument('--length',type=float,default=None,
                            help='physical length of stream (pc)')
         # assuming Gaussian across stream.
-        # ignore Position Angle for now, assuming the stream is east-west oriented.
-
         return parser
 
 if __name__ == "__main__":
@@ -173,7 +174,7 @@ if __name__ == "__main__":
     print 'going to simulate', ndwarf, 'dwarfs'
 
     #convert from surface brightness to absolute magnitude
-    #this is a simple estimation and need to modify in the future
+    #this is a simple estimation and need to be modified in the future
     area = angular_width * 3600 * angular_length * 3600
     apparent_magnitude = args.surface_brightness - 2.5 * np.log10(area)
     absolute_magnitude = apparent_magnitude - distance_modulus
@@ -185,6 +186,7 @@ if __name__ == "__main__":
     absolute_magnitude_single = absolute_magnitude + 2.5 * np.log10(ndwarf)
     print 'single absolute magnitude', absolute_magnitude_single
 
+    #convert from absolute magnitude to stellar mass / richness
     from scipy.interpolate import UnivariateSpline
     rich = np.logspace(2., 9., 1000)
     mag = isochrone.absolute_magnitude(rich)
@@ -193,7 +195,7 @@ if __name__ == "__main__":
     mag_to_rich = UnivariateSpline(mag, rich, s=0.)
     dwarf.richness = mag_to_rich(absolute_magnitude_single)
 
-
+    #generate array for the center of ndwarfs
     ra_arr = args.ra + np.arange(-(ndwarf-1.)/2, (ndwarf-1.)/2+1., 1.) * angular_radius / np.cos(np.deg2rad(args.dec))
     dec_arr = args.dec + np.zeros(ndwarf)
 
@@ -202,6 +204,7 @@ if __name__ == "__main__":
 
     data_all = [] # initial the big dataset for writing
     k = ndwarf #used for reassign the object ID, starting with ndwarf because 0-ndwarf will be for unresolved background
+
     # Write output
     if args.outfile:
         outfile = args.outfile
