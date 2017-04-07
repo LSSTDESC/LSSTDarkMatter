@@ -9,8 +9,8 @@ import copy
 from collections import OrderedDict as odict
 import numpy as np
 
-# FILTER = 'g'
-# MAG = 'MAG_%s'%FILTER.upper()
+FILTER = 'g'
+MAG = 'MAG_%s'%FILTER.upper()
 
 MAGLIMS =odict([('u',23),('g',25),('r',25),('i',24.5),('z',24),('y',23)])
 FILTERS = odict([('u',0),('g',1),('r',2),('i',3),('z',4),('y',5)])
@@ -40,19 +40,9 @@ DEFAULTS = odict([
     ('vistime', 33.0000000),
     ])
 
-# POINT = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none CCM 0.0 3.1".format(MAG)
+POINT = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none CCM 0.0 3.1".format(MAG)
 
-# SERSIC = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 sersic2d %(EXT)12.6f %(EXT)12.6f 0 1 none CCM 0.0 3.1".format(MAG)
-
-def set_filter(filter_name):
-    global FILTER
-    FILTER = '%s' %filter_name.lower()
-    global MAG
-    MAG = 'MAG_%s' %FILTER.upper()
-    global POINT
-    POINT = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 point none CCM 0.0 3.1".format(MAG)
-    global SERSIC
-    SERSIC = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 sersic2d %(EXT)12.6f %(EXT)12.6f 0 1 none CCM 0.0 3.1".format(MAG)
+SERSIC = "object %(ID)i %(RA)12.6f %(DEC)12.6f %({})12.6f starSED/phoSimMLT/lte031-4.5-1.0a+0.4.BT-Settl.spec.gz 0 0 0 0 0 0 sersic2d %(EXT)12.6f %(EXT)12.6f 0 0.5 none CCM 0.0 3.1".format(MAG)
 
 def set_defaults(kwargs,defaults):
     for k,v in defaults.items():
@@ -69,7 +59,7 @@ def read_instcat(filename,**kwargs):
 
 class InstCatWriter(object):
 
-    def write_g(self, filename, dwarf, data, force=True):
+    def write_toppart(self, filename, dwarf, force=True):
         if isinstance(filename,basestring):
             if os.path.exists(filename) and not force:
                 msg = "File %s already exists"%filename
@@ -81,36 +71,39 @@ class InstCatWriter(object):
             msg ="Unrecongnized file object"
             raise IOError(msg)
 
-        set_filter('g')
-
         out.write(self.comment_string())
         out.write(self.header_string(dwarf))
-        out.write(self.unresolved_string(dwarf,data))
-        out.write(self.resolved_string(dwarf,data))
-        out.write('\n')
+        return out
+
+
+    def write_middlepart(self, filename, dwarf, data, idx, force=True):
+        if isinstance(filename,basestring):
+            if os.path.exists(filename) and not force:
+                msg = "File %s already exists"%filename
+                raise IOError(msg)
+            out = open(filename,'a')
+        elif isinstance(filename,file):
+            out = filename
+        else:
+            msg ="Unrecongnized file object"
+            raise IOError(msg)
+        out.write(self.unresolved_string(dwarf,data, idx))
 
         return out
 
-    def write_r(self, filename, dwarf, data, force=True):
+    def write_endpart(self, filename, dwarf, data, force=True):
         if isinstance(filename,basestring):
             if os.path.exists(filename) and not force:
                 msg = "File %s already exists"%filename
                 raise IOError(msg)
-            out = open(filename,'w')
+            out = open(filename,'a')
         elif isinstance(filename,file):
             out = filename
         else:
             msg ="Unrecongnized file object"
             raise IOError(msg)
-
-        set_filter('r')
-
-        out.write(self.comment_string())
-        out.write(self.header_string(dwarf))
-        out.write(self.unresolved_string(dwarf,data))
         out.write(self.resolved_string(dwarf,data))
         out.write('\n')
-
         return out
 
     def comment_string(self,comment=None):
@@ -133,9 +126,9 @@ class InstCatWriter(object):
         sel = (data[MAG] <= MAGLIMS[FILTER])
         return '\n'.join(np.char.mod([POINT],data[sel]))
 
-    def unresolved_string(self, dwarf, data, **kwargs):
+    def unresolved_string(self, dwarf, data, idx, **kwargs):
         sel = (data[MAG] > MAGLIMS[FILTER])
-        params = dict(ID=0,
+        params = dict(ID=idx,
                       RA=dwarf.lon,
                       DEC=dwarf.lat,
                       EXT=dwarf.extension*3600 / 1.68, # arcsec
