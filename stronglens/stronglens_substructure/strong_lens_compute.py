@@ -9,7 +9,7 @@ zl=da[1, ind]
 zs=da[1, ind+1]
 sigma_a=da[2, ind]
 
-ff = open('strong_lens_compute.txt','w')
+ff = open('slac_lenses_compute.txt','w')
 ff.write('## Computing properties for the strong lensing systems in Bolton 2006, Apj 638:703-724\n')
 ff.write('## ZS, ZL, sigma_a (km/s), theta_E (asec), sigma_c (solar mass/Mpc^2), m_einstein (solar mass), ring mass for dr=0.6" (solar mass)\n')
 for ii in range(len(zs)):
