@@ -1,20 +1,48 @@
 #!/usr/bin/env python
+
 """
-Simple tool to simulate stellar populations.
+
+This is a simple tool to simulate mock stream catalog
+for image generation with imSim.
+Need ugali and dsphsim to run the code (see README.md)
+The stream is generated as a stack of a line of dwarf galaxies
+with Gaussian density profile. It is close to uniform along the
+stream except for edges of the stream.
+Limits of this version:
+1. Only one-band generation at a time. Need to modify instcat
+ to change to another band. TODO: Make a two-band version for CMD
+  similar to satsim
+2. Assume stream is east-west oriented. Input Position Angle
+ is currently ignored. TODO: make P.A. an effective input
+3. Total luminosity is calculated surface_brightness*(width*length).
+ In reality, the stream is not uniform at the edge of the stream,
+ so this is just an approximation.
+4. When the simulated dwarf is too bright (Mv < -13) or
+ too faint (Mv > 2), the catalog will not be generated
+
+Inputs:
+(check --help)
+distance (kpc) or distance_module
+surface brightness (mag/arcsec^2)
+width (deg) or angular width (pc)
+length (deg) or angular length (pc)
+ra, dec
+
+example:
+python generateInstCat.py --surface_brightness=29.00 --angular_width=0.100000 \
+--angular_length=0.2 --distance=100.00 'catalogs/sb_29_width_0.1000deg_d_100kpc.txt'
+
 """
 
 import os,sys
 import numpy as np
 import logging
-
 import scipy.stats as stats
-
 import dsphsim
 from dsphsim.dwarf import Dwarf
 from dsphsim.instruments import factory as instrumentFactory
 from dsphsim.tactician import factory as tacticianFactory
 from dsphsim.velocity import PhysicalVelocity
-
 import instcat
 
 
@@ -147,6 +175,10 @@ if __name__ == "__main__":
 
     print 'distance_modulus', distance_modulus
 
+    distance = 10 ** (distance_modulus / 5. + 1) / 1000
+
+    print 'distance', distance, 'kpc'
+
     isochrone=Dwarf.createIsochrone(name=args.isochrone, age=args.age,
                                     metallicity=args.metallicity,
                                     distance_modulus=distance_modulus)
@@ -156,16 +188,18 @@ if __name__ == "__main__":
         angular_width = args.angular_width
     else:
         # Convert physical width to angular width in degrees
-        angular_width = args.width/(args.distance*1000) * 180./np.pi
+        angular_width = args.width/(distance*1000) * 180./np.pi
 
     if args.length == None:
         angular_length = args.angular_length
     else:
         # Convert physical length to angular width in degrees
-        angular_length = args.length/(args.distance*1000) * 180./np.pi
+        angular_length = args.length/(distance*1000) * 180./np.pi
 
     print 'angular_width:', angular_width, 'deg'
     print 'angular_length:', angular_length, 'deg'
+    print 'width', angular_width*np.pi/180.*(distance*1000), 'pc'
+    print 'length', angular_length*np.pi/180.*(distance*1000), 'pc'
 
     angular_radius = angular_width / 2.35 # in degree
     print 'angular_radius:', angular_radius, 'deg'
@@ -185,6 +219,16 @@ if __name__ == "__main__":
 
     absolute_magnitude_single = absolute_magnitude + 2.5 * np.log10(ndwarf)
     print 'single absolute magnitude', absolute_magnitude_single
+
+    if absolute_magnitude < -13:
+        print "WARNING: The simulated dwarfs are too massive and it will take a huge of computer time \
+        so I'm not going to run it, please change the input parameter"
+        sys.exit(1)
+
+    if absolute_magnitude_single > 2:
+        print "WARNING: The simulated dwarfs are too faint and it is not physical for stellar population generation \
+        so I'm not going to run it, please change the input parameter"
+        sys.exit(1)
 
     #convert from absolute magnitude to stellar mass / richness
     from scipy.interpolate import UnivariateSpline
@@ -230,6 +274,8 @@ if __name__ == "__main__":
 
     for j in range(args.nsims):
         for i in range(ndwarf):
+            np.random.seed(i) # random seeds to make dwarfs different
+
             kernel=Dwarf.createKernel(name=args.kernel,extension=angular_radius,
                                       ellipticity=0,
                                       position_angle=0,
@@ -254,9 +300,10 @@ if __name__ == "__main__":
             k = data['ID'][-1]
             writer.write_middlepart(out,dwarf,data,i)
             data_all.append(data)
+            #print data.shape
 
-        print 'each dwarf has', len(data), 'stars'
-        print 'the stream has', len(data_all)*len(data), 'stars'
+        print 'each dwarf has a total of', len(data), 'stars (including stars below detection limit)'
+        print 'the stream has', len(data_all)*len(data), 'stars (including stars below detection limit)'
 
         data_all = np.concatenate(data_all)
 
