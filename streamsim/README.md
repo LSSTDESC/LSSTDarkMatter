@@ -1,3 +1,7 @@
+# Description
+
+This is a simple tool to generate mock catalogs for streams and the associated images
+  with imSim.
 
 # Requirements:
 
@@ -20,26 +24,24 @@ https://github.com/DarkEnergySurvey/ugali
 * dsphsim
 https://github.com/kadrlica/dsphsim
 
-after ugali and dsphsim is installed, you can use generateInstCat.py to generate mock catalog of streams. use --help to see the input parameters. An example for the terminal command:
+# To use the code:
+
+* generateInstCat.py
+
+you can use generateInstCat.py to generate mock catalog of streams. use --help to see the input parameters. An example for the terminal command:
 
  py generateInstCat.py --angular_width 0.05 --angular_length 0.3 --surface_brightness 24 stream0.05_0.3_24.txt
 
-This generates a streamw with 0.05 deg x 0.3 deg and surface brightness of 24 mag/arcsec^2, and save it as file stream0.05_0.3_24.txt
+This generates a stream with 0.05 deg x 0.3 deg and surface brightness of 24 mag/arcsec^2, and save it as file stream0.05_0.3_24.txt
 
-You will also see the general information below in the terminal
-
-distance_modulus 17.5
-angular_width: 0.05 deg
-angular_length: 0.3 deg
-angular_radius: 0.0212765957447 deg
-going to simulate 14 dwarfs
-stream extension: 194400.0 in arcsec^2
-surface brightness 24.0
-total apparent magnitude 10.7782593485
-total absolute magnitude -6.72174065148
-single absolute magnitude -3.85642056228
-center ra, dec: 54.0 -54.0
-each dwarf has 13442 stars
-the stream has 188188 stars
+The general information of the stream and the simulation will display in the terminal.
 
 Note the code was generating a line of N dwarfs with Gaussian profile to mimic the stream. The half-light radius of the dwarf rh = width/2.35 --0.02 deg in this case and number of dwarf N = length/rh -- 14 in this case.
+
+* doimsim.py
+
+after a mock catalog is generated, you can use doimsim.py to generate images with imSim
+
+* run_generate.py
+
+this code will run generateInstCat.py and doimsim.py to generate a grid of catalogs and the associated images with varius surface brightness, distance, stream width, etc.
