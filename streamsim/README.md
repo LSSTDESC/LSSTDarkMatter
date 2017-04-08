@@ -36,12 +36,13 @@ This generates a stream with 0.05 deg x 0.3 deg and surface brightness of 24 mag
 
 The general information of the stream and the simulation will display in the terminal.
 
-Note the code was generating a line of N dwarfs with Gaussian profile to mimic the stream. The half-light radius of the dwarf rh = width/2.35 --0.02 deg in this case and number of dwarf N = length/rh -- 14 in this case.
+Note the code generates a line of N dwarfs with Gaussian profile to mimic the stream. The half-light radius of the dwarf rh = width/2.35 --0.02 deg in this case and number of dwarf N = length/rh -- 14 in this case.
+
+* run_generate.py
+
+this code will run generateInstCat.py to generate a grid of catalogs with varius surface brightness, distance, stream width, etc.
 
 * doimsim.py
 
 after a mock catalog is generated, you can use doimsim.py to generate images with imSim
 
-* run_generate.py
-
-this code will run generateInstCat.py and doimsim.py to generate a grid of catalogs and the associated images with varius surface brightness, distance, stream width, etc.
