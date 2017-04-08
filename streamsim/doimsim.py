@@ -4,6 +4,8 @@ This is the imSim program, used to drive GalSim to simulate the LSST.  Written
 for the DESC collaboration and LSST project.  This version of the program can
 read phoSim instance files as is. It leverages the LSST Sims GalSim interface
 code found in sims_GalSimInterface.
+
+doall() is modified from the original version in satsim
 """
 from __future__ import absolute_import, print_function
 import os
