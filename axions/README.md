@@ -1,0 +1,15 @@
+# Axion Constraints from Astrophysics
+
+Axion constraint plots often include constraints derived from astrophysics. Here we attempt to collect those constraints in order to see whether LSST will be able to improve their sensitivity.
+
+[Neutrino and Axion Bounds from the Globular Cluster M5 (NGC 5904)](http://adsabs.harvard.edu/abs/2013PhRvL.111w1301V)
+
+The red-giant branch (RGB) in globular clusters is extended to larger brightness if the degenerate helium core loses too much energy in "dark channels." Based on a large set of archival observations, we provide high-precision photometry for the Galactic globular cluster M5 (NGC 5904), allowing for a detailed comparison between the observed tip of the RGB with predictions based on contemporary stellar evolution theory. In particular, we derive 95% confidence limits of $g_{ae} < 4.3 \times 10^{-13}$ on the axion-electron coupling and $\mu_\nu < 4.5 \times 10^{-12}$ \mu B$ (Bohr magneton $\mu B = e/2 m_e$) on a neutrino dipole moment, based on a detailed analysis of statistical and systematic uncertainties. The cluster distance is the single largest source of uncertainty and can be improved in the future.
+
+[Axions and the cooling of white dwarf stars](http://adsabs.harvard.edu/abs/2008ApJ...682L.109I)
+
+White dwarfs are the end product of the lives of intermediate- and low-mass stars and their evolution is described as a simple cooling process. Recently, it has been possible to determine with an unprecedented precision their luminosity function, that is, the number of stars per unit volume and luminosity interval. We show here that the shape of the bright branch of this function is only sensitive to the averaged cooling rate of white dwarfs and we propose to use this property to check the possible existence of axions, a proposed but not yet detected weakly interacting particle. Our results indicate that the inclusion of the emission of axions in the evolutionary models of white dwarfs noticeably improves the agreement between the theoretical calculations and the observational white dwarf luminosity function. The best fit is obtained for $m_a \cos 2\beta$ meV, where ma is the mass of the axion and $\cos 2 \beta$ is a free parameter. We also show that values larger than 10 meV are clearly excluded. The existing theoretical and observational uncertainties do not yet allow the confirmation of the existence of axions, but our results clearly show that if their mass is of the order of a few meV, the white dwarf luminosity function is sensitive enough to detect their existence.
+
+[Astrophysical Axion Bounds](http://adsabs.harvard.edu/abs/2008LNP...741...51R)
+
+Axion emission by hot and dense plasmas is a new energy-loss channel for stars. Observable consequences include a modification of the solar sound-speed profile, an increase of the solar neutrino flux, a reduction of the helium-burning lifetime of globular-cluster stars, accelerated white-dwarf cooling, and a reduction of the supernova SN 1987A neutrino burst duration. I review and update these arguments and summarize the resulting axion constraints.
