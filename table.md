@@ -1,4 +1,4 @@
-Probe | Constraint | LSST Impact | Complementary Instruments | Complications | Current Constraints |
+Probe | Constraint | LSST Impact | Complementary Instruments | Complications | References |
 ----- | ---------- | ----------- | ------------------------- | ------------- | ------------------- |
 Gaps in Streams | Power at small scale | Increasing number of streams; large distances less suceptible to disk baryons | Gaia; spec. follow-up; w-first | subhalo disruption by disk; gaps from baryons |
 Potential from Streams | Halo shape | Increasing number of streams | spectroscopy; Gaia; wfirst | perturbation from large accretion events (MW history); non-equilibrium dynamics |
