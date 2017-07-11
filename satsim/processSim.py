@@ -1,9 +1,3 @@
-"""
-A slim version of pipe_tasks/calibrate with only detection, deblending and measurement.
-To use it, modify confif part as you wish, then
-python processSim.py <input image> <output fits catalog>
-"""
-
 import math
 
 from lsstDebug import getDebugFrame
@@ -12,8 +6,6 @@ import lsst.pipe.base as pipeBase
 import lsst.afw.table as afwTable
 from lsst.meas.astrom import AstrometryTask, displayAstrometry, createMatchMetadata,\
     LoadAstrometryNetObjectsTask
-import lsst.afw.image as afwImg
-
 from lsst.obs.base import ExposureIdInfo
 import lsst.daf.base as dafBase
 from lsst.afw.math import BackgroundList
@@ -50,33 +42,22 @@ class ProcessSimConfig(pexConfig.Config):
 
 
 class ProcessSimTask(pipeBase.Task):
-    _DefaultName = "processSim"
+    
     ConfigClass = ProcessSimConfig
     
     def __init__(self, **kwds):
         pipeBase.Task.__init__(self, **kwds)
         
         # add schema here
-        self.schemaMapper = None
-        self.schema = afwTable.SourceTable.makeMinimalSchema()
-        
-        # make sub-tasks
-        self.makeSubtask("detection", schema=self.schema)
+        self.makeSubTask("detection", schema=self.schema)
         if self.config.doDeblend:
-            self.makeSubtask("deblend", schema=self.schema)
-        self.makeSubtask("measurement", schema=self.schema)
+            self.makeSubTask("deblend", schema=self.schema)
+        self.makeSubTask("measurement", schema=self.schema)
     
     
     def run(self, exposure):
-        
-        table = SourceTable.make(self.schema)
-        background = None
-        
-        detRes = self.detection.run(table=table, exposure=exposure)
+        detRes = self.detection.run(exposure=exposure)
         sourceCat = detRes.sources
-        
-        if background is None:
-            background = BackgroundList()
         if detRes.fpSets.background:
             background.append(detRes.fpSets.background)
         
@@ -102,16 +83,10 @@ if __name__ == "__main__":
     import pyfits
     fits = pyfits.open(sys.argv[1])
     data = fits[0].data
-    hdr = afwImg.readMetadata(sys.argv[1])
-    wcs = afwImg.makeWcs(hdr)
-
     exposure = lsst.afw.image.ExposureF(data.shape[1], data.shape[0])
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
     exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
-    exposure.setWcs(wcs)
-    ### The psf is hardcoded as sigma=0.6 with the shape of 39x39
     exposure.setPsf(lsst.afw.detection.GaussianPsf(39, 39, 0.6))
-    
     config = ProcessSimTask.ConfigClass()
     task = ProcessSimTask(config=config)
     result = task.run(exposure)

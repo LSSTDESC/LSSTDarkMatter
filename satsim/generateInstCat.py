@@ -54,8 +54,13 @@ class Simulator(object):
                             help="number of simulations")
 
         group = parser.add_argument_group('Physical')
-        group.add_argument('--stellar_mass',type=float,default=2000.,
+        # Stellar mass and absolute magnitude are mutually exclusive
+        egroup = group.add_mutually_exclusive_group()
+        egroup.add_argument('--stellar_mass',type=float,default=2000.,
                             help='stellar mass of satellite (Msun)')
+        egroup.add_argument('--absolute_magnitude',type=float,default=None,
+                            help='absolute magnitude of satellite')
+
 
         group = parser.add_argument_group('Kinematic')
         group.add_argument('--kinematics',type=str,default='Gaussian',
@@ -84,8 +89,12 @@ class Simulator(object):
                            help='age of stellar population (Gyr)')
         group.add_argument('--metallicity',type=float,default=2e-4,
                            help='metallicity of stellar population')
-        group.add_argument('--distance_modulus',type=float,default=17.5,
+        # Distance modulus and distance are mutually exclusive
+        egroup = group.add_mutually_exclusive_group()
+        egroup.add_argument('--distance_modulus',type=float,default=17.5,
                             help='distance modulus')
+        egroup.add_argument('--distance',type=float,default=None,
+                            help='distaance to satellite (kpc)')
 
         group = parser.add_argument_group('Kernel')
         group.add_argument('--kernel',type=str,default='RadialExponential',
@@ -98,8 +107,12 @@ class Simulator(object):
                            help='projected half-light radius (deg)')
         group.add_argument('--ellipticity',type=float,default=0.0,
                            help='spatial extension (deg)')
-        group.add_argument('--position_angle',type=float,default=0.0,
+        # Physical and angular extension are mutually exclusive
+        egroup = group.add_mutually_exclusive_group()
+        egroup.add_argument('--position_angle',type=float,default=0.0,
                            help='position angle east-of-north (deg)')
+        egroup.add_argument('--half_light_radius',type=float,default=None,
+                            help='half-light radius (pc)')
 
         return parser
 
@@ -114,19 +127,44 @@ if __name__ == "__main__":
     if args.seed is not None:
         np.random.seed(args.seed)
 
-
     dwarf = Dwarf()
+    
+    if args.distance == None:
+        distance_modulus = args.distance_modulus
+    else:
+        # Calculate distance modulus from distance in kpc
+        distance_modulus = 5. * (np.log10(args.distance * 1.e3) - 1.)
+
     isochrone=Dwarf.createIsochrone(name=args.isochrone, age=args.age,
                                     metallicity=args.metallicity,
-                                    distance_modulus=args.distance_modulus)
+                                    distance_modulus=distance_modulus)
     dwarf.set_isochrone(isochrone)
 
-    kernel=Dwarf.createKernel(name=args.kernel,extension=args.extension,
+    if args.half_light_radius == None:
+        extension = args.extension
+    else:
+        # Convert physical half-light radius to extension in degrees
+        extension = args.half_light_radius/(args.distance*1000) * 180./np.pi
+
+    kernel=Dwarf.createKernel(name=args.kernel,extension=extension,
                               ellipticity=args.ellipticity,
                               position_angle=args.position_angle,
                               lon=args.ra,lat=args.dec)
     dwarf.set_kernel(kernel)
-    dwarf.richness = args.stellar_mass/dwarf.isochrone.stellar_mass()
+    
+    if args.absolute_magnitude == None:
+        stellar_mass = args.stellar_mass
+        dwarf.richness = stellar_mass/dwarf.isochrone.stellar_mass()
+    else:         
+        from scipy.interpolate import UnivariateSpline
+        rich = np.logspace(2., 9., 1000)
+        mag = isochrone.absolute_magnitude(rich)
+        rich = rich[np.argsort(mag)]
+        mag = np.sort(mag)
+        mag_to_rich = UnivariateSpline(mag, rich, s=0.)
+        dwarf.richness = mag_to_rich(args.absolute_magnitude)
+        # print 'Recalculated abs mag = %.2f' %isochrone.absolute_magnitude(dwarf.richness)
+        # print 'Input abs mag = %.2f' %args.absolute_magnitude
 
     # Set the kinematic properties
     if args.rs is not None: args.rvmax = 2.163*args.rs
@@ -137,8 +175,8 @@ if __name__ == "__main__":
     dwarf.set_kinematics(kinematics)
     logging.debug(str(dwarf))
 
-    import writer
-    instcat = writer.InstCatWriter()
+    import instcat
+    writer = instcat.InstCatWriter()
 
     for i in range(args.nsims):
         # Run the simulation
@@ -148,16 +186,26 @@ if __name__ == "__main__":
         # Write output
         if args.outfile:
             outfile = args.outfile
+            base,ext = os.path.splitext(outfile)
             if args.nsims > 1:
-                base,ext = os.path.splitext(outfile)
                 suffix = '_{:0{width}d}'.format(i+1,width=len(str(args.nsims)))
-                outfile = base + suffix + ext
-            if os.path.exists(outfile): os.remove(outfile)
-            logging.info("Writing %s..."%outfile)
-            out = open(outfile,'w',1)
+                outfile_g = base + '_g' + suffix + ext
+                outfile_r = base + '_r' + suffix + ext
+            else:
+                outfile_g = base + '_g' + ext
+                outfile_r = base + '_r' + ext
+            print 'outfile_g = %s' %outfile_g
+            print 'outfile_r = %s' %outfile_r
+            if os.path.exists(outfile_g): os.remove(outfile_g)
+            if os.path.exists(outfile_r): os.remove(outfile_r)
+            logging.info("Writing %s and %s..."%(outfile_g, outfile_r))
+            out_g = open(outfile_g,'w',1)
+            out_r = open(outfile_r,'w',1)
         else:
-            out = sys.stdout
+            out_g = sys.stdout
+            out_r = sys.stdout
 
-        logging.info("Writing %s..."%outfile)
-        instcat.write(out,dwarf,data)
-        out.flush()
+        writer.write_g(out_g,dwarf,data)
+        writer.write_r(out_r,dwarf,data)
+        out_g.flush()
+        out_r.flush()
