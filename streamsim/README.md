@@ -29,10 +29,10 @@ https://github.com/kadrlica/dsphsim
 * generateInstCat.py
 
 you can use generateInstCat.py to generate mock catalog of streams. use --help to see the input parameters. An example for the terminal command:
-
- py generateInstCat.py --angular_width 0.05 --angular_length 0.3 --surface_brightness 24 stream0.05_0.3_24.txt
-
-This generates a stream with 0.05 deg x 0.3 deg and surface brightness of 24 mag/arcsec^2, and save it as file stream0.05_0.3_24.txt
+```
+ python generateInstCat.py --angular_width 0.05 --angular_length 0.3 --surface_brightness 24 stream0.05_0.3_24.txt
+```
+This generates a stream with 0.05 deg x 0.3 deg and surface brightness of 24 mag/arcsec^2, and save it as file `stream0.05_0.3_24.txt`
 
 The general information of the stream and the simulation will display in the terminal.
 
@@ -40,9 +40,9 @@ Note the code generates a line of N dwarfs with Gaussian profile to mimic the st
 
 * run_generate.py
 
-this code will run generateInstCat.py to generate a grid of catalogs with varius surface brightness, distance, stream width, etc.
+this code will run `generateInstCat.py` to generate a grid of catalogs with varius surface brightness, distance, stream width, etc.
 
 * doimsim.py
 
-after a mock catalog is generated, you can use doimsim.py to generate images with imSim
+after a mock catalog is generated, you can use `doimsim.py` to generate images with imSim
 
