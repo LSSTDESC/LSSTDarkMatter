@@ -2,6 +2,9 @@
 
 ## Image simulation
 
+* Installation instructions
+https://confluence.lsstcorp.org/display/SIM/Catalogs+and+MAF
+
 * Main LSST installation 
 eups distrib install -t v13_0 lsst_distrib
 
