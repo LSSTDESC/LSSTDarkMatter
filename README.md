@@ -1,6 +1,6 @@
 # LSST Dark Matter
 
-This is a repository to collect information related to the study of the fundamental nature of dark matter with LSST. Our goal is to uderstand the microphysics of dark matter: to identify the fundamental constituents of dark matter (e.g., new fundamental particles, compact objects, etc.), and to characterize the properties of these constituents (e.g, mass, temperature, self-interaction rate, etc.). LSST offers a unique avenue to attack the dark matter problem through "astrophysical probes"; however, there is also a significant overlap with experiments performing direct and indirect searches for dark matter.
+This is a repository to collect information related to the study of the fundamental nature of dark matter with LSST. Our goal is to understand the microphysics of dark matter: to identify the fundamental constituents of dark matter (e.g., new fundamental particles, compact objects, etc.), and to characterize the properties of these constituents (e.g, mass, temperature, self-interaction rate, etc.). LSST offers a unique avenue to attack the dark matter problem through "astrophysical probes"; however, there is also a significant overlap with experiments performing direct and indirect searches for dark matter. It is worth emphasizing that, when compared to other cosmological probes and analyses performed within DESC, the Dark Matter studies here very often focus on the small structures in the Dark Matter hierarchical clustering, quite complementary to large scale probes for Dark Energy.
 
 ## Projects
 
@@ -14,7 +14,7 @@ There are many avenues to attack the dark matter problem with LSST. Below is a b
 * Microlensing ([macho](macho)): Searches for massive compact halo objects (MACHOs) using the microlensing of stars.
 * Nanolensing ([nanolensing](nanolensing)): Can we use gravitational lensing to detect dark matter subhaloes directly?
 
-This is certainly not an exhaustive list, and we would be excited to add your new idea!
+This is certainly not an exhaustive list, and we would be excited to add your new idea! One immediate example concerns the characterization of the Milky Way graviational potential through star orbits, especially the old Carbon-rich population in the outskirts of the Galaxy, that LSST should be able to detect.
 
 ## Resources
 
