@@ -12,6 +12,7 @@ There are many avenues to attack the dark matter problem with LSST. Below is a b
 * Axion Cooling of Stars ([axions](axions)): Axions (and other axion-like particles) would provide an alternative thermal transport mechanism altering stellar physics (e.g., white dwarf lifetimes)
 * Galaxy Cluster Density Profiles ([clusters](clusters)): Dark matter self-interactions would alter the density profiles in galaxy clusters and could lead to observable offsets between galaxies and dark matter in colliding clusters.
 * Microlensing ([macho](macho)): Searches for massive compact halo objects (MACHOs) using the microlensing of stars.
+* Nanolensing ([nanolensing](nanolensing)): Can we use gravitational lensing to detect dark matter subhaloes directly?
 
 This is certainly not an exhaustive list, and we would be excited to add your new idea!
 
