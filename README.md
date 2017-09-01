@@ -6,11 +6,12 @@ This is a repository to collect information related to the study of the fundamen
 
 There are many avenues to attack the dark matter problem with LSST. Below is a brief description of some that we have started to consider:
 
-* Local Group Dwarf Galaxies: 
-* Stellar Streams:
-* Strong Lensing Substructures:
-* Axion Cooling: 
-* Galaxy Cluster Density Profiles:
+* Local Group Dwarf Galaxies ([satsim](satsim) and [satellites](satellites)): Local Group dwarf galaxies provide the most direct tracer of the low-mass end of the matter power spectrum and are sensitive to deviations from LCDM on the smallest scales.
+* Stellar Streams ([streamsim](streamsim)]: Perturbations in stellar streams can be used to trace the dark matter subhalo population below the threshold for star formation.
+* Strong Lensing Substructures ([stronglens](stronglens)): Dark matter substructure can be traced independently of baryons through perturbations in the strong lensing of galaxies at cosmological distances. 
+* Axion Cooling of Stars ([axions](axions)): Axions (and other axion-like particles) would provide an alternative thermal transport mechanism altering stellar physics (e.g., white dwarf lifetimes)
+* Galaxy Cluster Density Profiles ([clusters](clusters)):
+* Microlensing ([macho](macho)): Searches for massive compact halo objects (MACHOs) using the microlensing of stars.
 
 This is certainly not an exhaustive list, and we would be excited to add your new idea!
 
