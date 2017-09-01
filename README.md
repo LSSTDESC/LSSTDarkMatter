@@ -21,7 +21,7 @@ This is certainly not an exhaustive list, and we would be excited to add your ne
 * White Paper: We are in the process of writing a white paper to summarize the various avenues to attack the dark matter problem with LSST. 
 * Living Bibliography ([bib](https://www.overleaf.com/read/pxkbfrqxnqdx)): We have started to compile a living bibliography 
 * Dark Matter Hack Session:  The LSST dark matter project began to take form at the [LSST DESC April 2017 Hack Week](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+FNAL). You can find more information on the results of that hack [on Confluence](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+Dark+Matter+Hack).
-* List of Dark Matter Probes ([table](table.md)]) One result of the hack week was a high-level list of dark matter probes with LSST.
+* List of Dark Matter Probes ([table](table.md)) One result of the hack week was a high-level list of dark matter probes with LSST.
 
 ## Getting Involved
 
