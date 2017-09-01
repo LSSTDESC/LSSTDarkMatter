@@ -10,16 +10,17 @@ There are many avenues to attack the dark matter problem with LSST. Below is a b
 * Stellar Streams ([streamsim](streamsim)]: Perturbations in stellar streams can be used to trace the dark matter subhalo population below the threshold for star formation.
 * Strong Lensing Substructures ([stronglens](stronglens)): Dark matter substructure can be traced independently of baryons through perturbations in the strong lensing of galaxies at cosmological distances. 
 * Axion Cooling of Stars ([axions](axions)): Axions (and other axion-like particles) would provide an alternative thermal transport mechanism altering stellar physics (e.g., white dwarf lifetimes)
-* Galaxy Cluster Density Profiles ([clusters](clusters)):
+* Galaxy Cluster Density Profiles ([clusters](clusters)): Dark matter self-interactions would alter the density profiles in galaxy clusters and could lead to observable offsets between galaxies and dark matter in colliding clusters.
 * Microlensing ([macho](macho)): Searches for massive compact halo objects (MACHOs) using the microlensing of stars.
 
 This is certainly not an exhaustive list, and we would be excited to add your new idea!
 
 ## Resources
 
-* Dark Matter White Paper: We are in the process of writing a white paper to summarize the various avenues to attack the dark matter problem with LSST. 
+* White Paper: We are in the process of writing a white paper to summarize the various avenues to attack the dark matter problem with LSST. 
 * Living Bibliography: We have started to compile a living bibliography 
 * Dark Matter Hack Session:  The LSST dark matter project began to take form at the [LSST DESC April 2017 Hack Week](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+FNAL). You can find more information on the results of that hack [on Confluence](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+Dark+Matter+Hack).
+* List of Dark Matter Probes: One result of the hack week was a high-level list of dark matter probes with LSST.
 
 ## Getting Involved
 
