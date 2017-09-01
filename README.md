@@ -2,15 +2,25 @@
 
 This is a repository to collect information related to the study of the fundamental nature of dark matter with LSST. Our goal is to uderstand the microphysics of dark matter: to identify the fundamental constituents of dark matter (e.g., new fundamental particles, compact objects, etc.), and to characterize the properties of these constituents (e.g, mass, temperature, self-interaction rate, etc.). LSST offers a unique avenue to attack the dark matter problem through "astrophysical probes"; however, there is also a significant overlap with experiments performing direct and indirect searches for dark matter.
 
-# Projects
+## Projects
 
+There are many avenues to attack the dark matter problem with LSST. Below is a brief description of some that we have started to consider:
 
+* Local Group Dwarf Galaxies: 
+* Stellar Streams:
+* Strong Lensing Substructures:
+* Axion Cooling: 
+* Galaxy Cluster Density Profiles:
 
-# Resources
+This is certainly not an exhaustive list, and we would be excited to add your new idea!
 
-The LSST dark matter project began to take form at the [LSST DESC April 2017 Hack Week](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+FNAL). You can find more information on the results of that hack [on Confluence](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+Dark+Matter+Hack).
+## Resources
 
-# How to Get Involved
+* Dark Matter White Paper: We are in the process of writing a white paper to summarize the various avenues to attack the dark matter problem with LSST. 
+* Living Bibliography: We have started to compile a living bibliography 
+* Dark Matter Hack Session:  The LSST dark matter project began to take form at the [LSST DESC April 2017 Hack Week](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+FNAL). You can find more information on the results of that hack [on Confluence](https://confluence.slac.stanford.edu/display/LSSTDESC/Hack+Week%3A+April+3-7+2017+-+Dark+Matter+Hack).
+
+## Getting Involved
 
 The study of dark matter with LSST is a rapidly growing field. If you are interested in joining, there are several ways to get involved:
 * Join our Slack channel: [#lsst-desc-darkmatter](https://lsstc.slack.com/messages/C4THJHURX)
