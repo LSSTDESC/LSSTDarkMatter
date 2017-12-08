@@ -16,7 +16,7 @@ from lsst.afw.math import BackgroundList
 from lsst.afw.table import IdFactory, SourceTable
 from lsst.obs.base import ExposureIdInfo
 import lsst.daf.base as dafBase
-from lsst.meas.astrom import AstrometryTask, displayAstrometry, createMatchMetadata, LoadAstrometryNetObjectsTask
+from lsst.meas.astrom import AstrometryTask, displayAstrometry, createMatchMetadata
 from lsst.meas.algorithms import SourceDetectionTask
 from lsst.meas.base import SingleFrameMeasurementTask, ApplyApCorrTask, CatalogCalculationTask
 from lsst.meas.deblender import SourceDeblendTask
@@ -96,9 +96,15 @@ class ProcessSimTask(pipeBase.Task):
 if __name__ == "__main__":
     import sys
     import pyfits
-    fits = pyfits.open(sys.argv[1])
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('infile')
+    parser.add_argument('outfile')
+    args = parser.parse_args()
+
+    fits = pyfits.open(args.infile)
     data = fits[0].data
-    fits_afw = lsst.afw.image.ExposureF(sys.argv[1])
+    fits_afw = lsst.afw.image.ExposureF(args.infile)
     exposure = lsst.afw.image.ExposureF(data.shape[1], data.shape[0])
     exposure.getMaskedImage().getImage().getArray()[:,:] = data
     exposure.getMaskedImage().getVariance().getArray()[:,:] = np.var(data)
@@ -111,4 +117,4 @@ if __name__ == "__main__":
     config = ProcessSimTask.ConfigClass()
     task = ProcessSimTask(config=config)
     result = task.run(exposure)
-    result.sourceCat.writeFits(sys.argv[2])
+    result.sourceCat.writeFits(args.outfile)

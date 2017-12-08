@@ -146,4 +146,12 @@ def doall():
         main(inppref+'/' +i,'doublegaussian',outpref)
     
 if __name__ == "__main__":
-    doall()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('infile')
+    parser.add_argument('-o','--outdir',default='./fits/')
+    parser.add_argument('-v','--verbose',action='store_true')
+    args = parser.parse_args()
+
+    if args.verbose:
+        logger = desc.imsim.get_logger('DEBUG')
+    main(args.infile,'doublegaussian',args.outdir)
