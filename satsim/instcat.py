@@ -34,9 +34,10 @@ DEFAULTS = odict([
     ('obshistid', 1),
     ('seed', 1),
     ('seeing', 0.7613760),
-    ('rawSeeing', 0.7613760),
-    ('FWHMgeom', 1.210734),
-    ('FWHMeff', 1.409653),
+    #ADW: No longer used
+    #('rawSeeing', 0.7613760),
+    #('FWHMgeom', 1.210734),
+    #('FWHMeff', 1.409653),
     ('sunalt', -59.1098785),
     ('vistime', 33.0000000),
     ])
