@@ -137,11 +137,11 @@ def main(file, psf, outdir):
 
 
 def doall():
-    inppref = '../instcat/'
+    inppref = './'
     # prefix to the input photsim files
     outpref = 'fits/'
     # outfiles prefix
-    inputfiles = ['sersic_g.txt', 'sersic_r.txt']
+    inputfiles = ['eric_outfiles_g', 'eric_outfiles_r']
     for i in inputfiles:
         main(inppref+'/' +i,'doublegaussian',outpref)
     

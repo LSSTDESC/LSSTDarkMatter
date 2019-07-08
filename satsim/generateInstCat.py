@@ -194,8 +194,8 @@ if __name__ == "__main__":
             else:
                 outfile_g = base + '_g' + ext
                 outfile_r = base + '_r' + ext
-            print 'outfile_g = %s' %outfile_g
-            print 'outfile_r = %s' %outfile_r
+            print ('outfile_g = %s' %outfile_g)
+            print ('outfile_r = %s' %outfile_r)
             if os.path.exists(outfile_g): os.remove(outfile_g)
             if os.path.exists(outfile_r): os.remove(outfile_r)
             logging.info("Writing %s and %s..."%(outfile_g, outfile_r))

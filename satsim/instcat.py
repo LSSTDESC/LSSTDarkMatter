@@ -8,6 +8,7 @@ import os
 import copy
 from collections import OrderedDict as odict
 import numpy as np
+from io import IOBase
 
 # FILTER = 'g'
 # MAG = 'MAG_%s'%FILTER.upper()
@@ -70,12 +71,12 @@ def read_instcat(filename,**kwargs):
 class InstCatWriter(object):
 
     def write_g(self, filename, dwarf, data, force=True):
-        if isinstance(filename,basestring):
+        if isinstance(filename,str):
             if os.path.exists(filename) and not force:
                 msg = "File %s already exists"%filename
                 raise IOError(msg)
             out = open(filename,'w')
-        elif isinstance(filename,file):
+        elif isinstance(filename,IOBase):
             out = filename
         else:
             msg ="Unrecongnized file object"
@@ -92,12 +93,12 @@ class InstCatWriter(object):
         return out
 
     def write_r(self, filename, dwarf, data, force=True):
-        if isinstance(filename,basestring):
+        if isinstance(filename,str):
             if os.path.exists(filename) and not force:
                 msg = "File %s already exists"%filename
                 raise IOError(msg)
             out = open(filename,'w')
-        elif isinstance(filename,file):
+        elif isinstance(filename,IOBase):
             out = filename
         else:
             msg ="Unrecongnized file object"

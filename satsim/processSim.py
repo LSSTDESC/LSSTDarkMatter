@@ -16,7 +16,7 @@ from lsst.afw.math import BackgroundList
 from lsst.afw.table import IdFactory, SourceTable
 from lsst.obs.base import ExposureIdInfo
 import lsst.daf.base as dafBase
-from lsst.meas.astrom import AstrometryTask, displayAstrometry, createMatchMetadata
+from lsst.meas.astrom import AstrometryTask, displayAstrometry#, createMatchMetadata, LoadAstrometryNetObjectsTask
 from lsst.meas.algorithms import SourceDetectionTask
 from lsst.meas.base import SingleFrameMeasurementTask, ApplyApCorrTask, CatalogCalculationTask
 from lsst.meas.deblender import SourceDeblendTask
